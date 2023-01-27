@@ -1,22 +1,21 @@
-let ammassoDiAlbum = [];
+function fetchingAll() {
+  fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=slayer`)
+    .then(function (data) {
+      console.log(`try1`, data);
 
-fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=slayer`)
-  .then(function (data) {
-    console.log(`try1`, data);
+      if (data.ok) {
+        return data.json();
+      }
+    })
 
-    if (data.ok) {
-      return data.json();
-    }
-  })
+    .then(function (data) {
+      let albums = data.data;
+      console.log(albums);
 
-  .then(function (data) {
-    let albums = data.data;
-    console.log(albums);
-
-    let container = document.getElementById("spazio");
-    for (let i = 0; i < 4; i++) {
-      let num = Math.floor(Math.random() * albums.length);
-      container.innerHTML += ` <div class="col m-1">
+      let container = document.getElementById("spazio");
+      for (let i = 0; i < 4; i++) {
+        let num = Math.floor(Math.random() * albums.length);
+        container.innerHTML += ` <div class="col m-1">
                 <div class="card" style="width: 15rem;">
                     <img src="${albums[num].album.cover_big}" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -27,30 +26,29 @@ fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=slayer`)
                     </div>
                 </div>
             </div>`;
-    }
-    ammassoDiAlbum.push(albums);
-  })
-  .catch(function (err) {
-    console.log(err, `qualcosa è andato storto`);
-  });
+      }
+    })
+    .catch(function (err) {
+      console.log(err, `qualcosa è andato storto`);
+    });
 
-fetch(
-  `https://striveschool-api.herokuapp.com/api/deezer/search?q=nothingelsematter`
-)
-  .then(function (data) {
-    console.log(`try2`, data);
+  fetch(
+    `https://striveschool-api.herokuapp.com/api/deezer/search?q=nothingelsematter`
+  )
+    .then(function (data) {
+      console.log(`try2`, data);
 
-    if (data.ok) {
-      return data.json();
-    }
-  })
+      if (data.ok) {
+        return data.json();
+      }
+    })
 
-  .then(function (data) {
-    let canzonePreferita = data.data;
-    console.log(canzonePreferita);
-    let container2 = document.getElementById("spazio2");
-    let num2 = 0;
-    container2.innerHTML += `<div class="card mb-3" >
+    .then(function (data) {
+      const canzonePreferita = data.data;
+
+      let container2 = document.getElementById("spazio2");
+      let num2 = 0;
+      container2.innerHTML += `<div class="card mb-3" >
   <div class="row g-0">
     <div class="col-md-8">
       <div class="card-body">
@@ -65,11 +63,52 @@ fetch(
     </div>
   </div>
 </div>`;
-  })
-  .catch(function (err) {
-    console.log(err, `qualcosa è andato storto`);
-  });
-console.log("Prova", ammassoDiAlbum);
+    })
+    .catch(function (err) {
+      console.log(err, `qualcosa è andato storto`);
+    });
+  fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=meshuggah`)
+    .then(function (data) {
+      console.log(`try3`, data);
+
+      if (data.ok) {
+        return data.json();
+      }
+    })
+    .then(function (data) {
+      let container3 = document.getElementById("container3");
+      let albumDaCarosello = data.data;
+      let primoNumero = 0;
+      let secondoNumero = 1;
+      let terzoNumero = 2;
+      container3.innerHTML += `
+      <div class="carousel-item active">
+            <img src="${albumDaCarosello[primoNumero].album.cover_big}" class="d-block " alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>${albumDaCarosello[primoNumero].album.title}</h5>    
+                            
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img src="${albumDaCarosello[secondoNumero].album.cover_big}" class="d-block " alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>${albumDaCarosello[secondoNumero].album.title}</h5>
+                </div>
+        </div>
+
+        <div class="carousel-item">
+            <img src="${albumDaCarosello[terzoNumero].album.cover_big}" class="d-block " alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>${albumDaCarosello[terzoNumero].album.title}</h5>
+                </div>
+        </div>
+    </div>`;
+    });
+}
+
+window.onload = fetchingAll();
+
 //   .then(function (data) {
 //     let albumPreferiti = data.data;
 //     console.log(albumPreferiti);
