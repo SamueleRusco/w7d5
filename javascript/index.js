@@ -11,7 +11,7 @@ function fetchingAll() {
     .then(function (data) {
       let albums = data.data;
       console.log(albums);
-
+      let alertAlbums = document.getElementById("alert");
       let container = document.getElementById("spazio");
       for (let i = 0; i < 4; i++) {
         let num = Math.floor(Math.random() * albums.length);
@@ -19,13 +19,18 @@ function fetchingAll() {
                 <div class="card" style="width: 15rem;">
                     <img src="${albums[num].album.cover_big}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">${albums[num].album.title}</h5>
+                        <h5 class="card-title" id="${albums[num].rank}">${albums[num].album.title}</h5>
                        <p class="card-title">${albums[num].title_short}</p>
                         <p class="card-text">${albums[num].artist.name} </p>
                         
                     </div>
                 </div>
             </div>`;
+        //fare foreach per album che ritornino le canzoni
+        alertAlbums.innerHTML += ` 
+  <h4  id="${albums[num].rank}">
+    ${albums[num].album.title}
+  </h4>`;
       }
     })
     .catch(function (err) {
@@ -55,7 +60,7 @@ function fetchingAll() {
         <h5 class="card-title">${canzonePreferita[num2].title_short}</h5>
         <p class="card-text">${canzonePreferita[num2].artist.name} </p>
         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        <p class="card-text"></p>
       </div>
     </div>
     <div class="col-md-4">
@@ -78,6 +83,7 @@ function fetchingAll() {
     .then(function (data) {
       let container3 = document.getElementById("container3");
       let albumDaCarosello = data.data;
+      let alertAlbums2 = document.getElementById("alert");
       let primoNumero = 0;
       let secondoNumero = 1;
       let terzoNumero = 2;
@@ -85,7 +91,7 @@ function fetchingAll() {
       <div class="carousel-item active">
             <img src="${albumDaCarosello[primoNumero].album.cover_big}" class="d-block " alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>${albumDaCarosello[primoNumero].album.title}</h5>    
+                <h5 id="${albumDaCarosello[primoNumero].rank}">${albumDaCarosello[primoNumero].album.title}</h5>    
                             
             </div>
         </div>
@@ -93,27 +99,30 @@ function fetchingAll() {
         <div class="carousel-item">
             <img src="${albumDaCarosello[secondoNumero].album.cover_big}" class="d-block " alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>${albumDaCarosello[secondoNumero].album.title}</h5>
+                <h5 id="${albumDaCarosello[secondoNumero].rank}">${albumDaCarosello[secondoNumero].album.title}</h5>
                 </div>
         </div>
 
         <div class="carousel-item">
             <img src="${albumDaCarosello[terzoNumero].album.cover_big}" class="d-block " alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>${albumDaCarosello[terzoNumero].album.title}</h5>
+                <h5 id="${albumDaCarosello[terzoNumero].rank}">${albumDaCarosello[terzoNumero].album.title}</h5>
                 </div>
         </div>
     </div>`;
+
+      //fare 3 foreach con ciò per trovare canzoni
+      alertAlbums2.innerHTML += ` 
+<h4 id="${albumDaCarosello[terzoNumero].rank}">${albumDaCarosello[terzoNumero].album.title}</h4>
+<h4 id="${albumDaCarosello[secondoNumero].rank}">${albumDaCarosello[secondoNumero].album.title}</h4>
+<h4 id="${albumDaCarosello[primoNumero].rank}">${albumDaCarosello[primoNumero].album.title}</h4>   
+`;
     });
+}
+let alertDiv = document.getElementById("alert");
+
+function toggleDiv() {
+  alertDiv.classList.toggle("d-none");
 }
 
 window.onload = fetchingAll();
-
-//   .then(function (data) {
-//     let albumPreferiti = data.data;
-//     console.log(albumPreferiti);
-//   });
-
-//   .catch(function (data) {
-//     console.log(err);
-//   });
