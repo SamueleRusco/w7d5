@@ -1,0 +1,9 @@
+.alertSong {
+    border: 1px solid green;
+    background-color: rgb(208, 255, 138);
+    max-width: fit-content;
+    padding: 5px;
+    margin: 5px;
+    position: static;
+    bottom: 100px;
+}

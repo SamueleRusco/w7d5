@@ -28,7 +28,7 @@ function fetchingAll() {
             </div>`;
         //fare foreach per album che ritornino le canzoni
         for (let i = 0; i < albums.length; i++) {
-          alertAlbums.innerHTML += `<h4  id="${albums[i].rank}">${albums[i].artist.name}: ${albums[i].album.title}</h4>`;
+          alertAlbums.innerHTML += `<p id="${albums[i].rank}">${albums[i].artist.name}: ${albums[i].album.title}</p>`;
         }
       }
     })
@@ -110,22 +110,14 @@ function fetchingAll() {
         </div>
     </div>`;
 
-      //fare 3 foreach con ciò per trovare canzoni
-
       for (let i = 0; i < albumDaCarosello.length; i++) {
-        alertAlbums2.innerHTML += `<h5 id="${albumDaCarosello[i].rank}">${albumDaCarosello[i].artist.name}: ${albumDaCarosello[i].title_short}</h5>`;
+        alertAlbums2.innerHTML += `<p id="${albumDaCarosello[i].rank}">${albumDaCarosello[i].artist.name}: ${albumDaCarosello[i].title_short}</p>`;
       }
-      //       alertAlbums2.innerHTML += `
-      // <h4 id="${albumDaCarosello[terzoNumero].rank}">${albumDaCarosello[terzoNumero].album.title}</h4>
-      // <h4 id="${albumDaCarosello[secondoNumero].rank}">${albumDaCarosello[secondoNumero].album.title}</h4>
-      // <h4 id="${albumDaCarosello[primoNumero].rank}">${albumDaCarosello[primoNumero].album.title}</h4>
-      // `;
     });
 }
 let alertDiv = document.getElementById("alert");
 
 function toggleDiv() {
-  // ordinoTutto();
   alertDiv.classList.toggle("d-none");
 }
 
